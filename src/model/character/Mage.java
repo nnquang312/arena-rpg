@@ -26,44 +26,47 @@ public class Mage extends Hero {
         isCriticalHit = false;
     }
 
-    private void countSkillsUsed() {
+    private String countSkillsUsed() {
         countSkills++;
         if (countSkills >= 5) {
             isCriticalHit = true;
             countSkills = 0;
+            return getName() + " đã sử dụng kỹ năng 5 lần, đòn đánh tiếp theo sẽ là đòn chí mạng!";
         }
+        return "";
     }
 
     // useSkills method for Mage, 3 skills with different mana costs and effects
     @Override
-    public void useSkills(Characters target, int choice) {
+    public String useSkills(Characters target, int choice) {
         switch (choice) {
             case 1: {
-                if (useMana(30)) {
-                    int dmg = getAttack() * 2;
-                    target.takeDamage(dmg);
-                    countSkillsUsed();
+                if (!useMana(30)) {
+                    return getName() + " không đủ mana để dùng skill 1!";
                 }
-                System.out.println(getName() + " không đủ mana để dùng skill 1!");
-                break;
+                int dmg = getAttack() * 2;
+                target.takeDamage(dmg);
+                return getName() + " dùng skill 1, gây " + dmg + " sát thương!";
             }
             case 2: {
-                if (useMana(25)) {
-                    this.heal(30);
-                    countSkillsUsed();
+                if (!useMana(25)) {
+                    return getName() + " không đủ mana để dùng skill 2!";
                 }
-                System.out.println(getName() + " không đủ mana để dùng skill 2!");
-                break;
+                this.heal(30);
+                return getName() + " dùng skill 2, hồi 30 HP!" + countSkillsUsed();
+
             }
             case 3: {
-                if (useMana(50)) {
-                    int dmg = getAttack() * 3 - target.getDefense();
-                    target.takeDamage(dmg);
-                    countSkillsUsed();
+                if (!useMana(50)) {
+                    return getName() + " không đủ mana để dùng skill 3!";
                 }
-                System.out.println(getName() + " không đủ mana để dùng skill 3!");
-                break;
+
+                int dmg = getAttack() * 3 - target.getDefense();
+                target.takeDamage(dmg);
+                return getName() + " dùng skill 3, gây " + dmg + " sát thương!" + countSkillsUsed();
             }
+            default:
+                return getName() + " skill không tồn tại!";
         }
     }
 

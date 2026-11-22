@@ -23,40 +23,38 @@ public class Warrior extends Hero {
     // useSkills method for Warrior, 3 skills with different mana costs and effects
     // Chọn skill: 1 = Chém Xoáy, 2 = Sóng Xung Kích, 3 = Tiếng Hô Chiến Trận
     @Override
-    public void useSkills(Characters target, int choice) {
+    public String useSkills(Characters target, int choice) {
         switch (choice) {
             case 1: {
                 if (!useMana(20)) {
                     System.out.println(getName() + " không đủ mana để dùng Chém Xoáy!");
-                    return;
                 }
                 int dmg = Math.max(0, (int) (getAttack() * 1.8) - target.getDefense());
                 target.takeDamage(dmg);
-                System.out.println(getName() + " dùng Chém Xoáy, gây " + dmg + " sát thương!");
-                break;
+                return getName() + " dùng Chém Xoáy, gây " + dmg + " sát thương!";
+
             }
             case 2: {
                 if (!useMana(30)) {
                     System.out.println(getName() + " không đủ mana để dùng Sóng Xung Kích!");
-                    return;
+                    return "";
                 }
                 int dmg = Math.max(0, getAttack() * 2 - target.getDefense());
                 target.takeDamage(dmg);
-                System.out.println(getName() + " tung Sóng Xung Kích, gây " + dmg + " sát thương!");
-                break;
+                return getName() + " dùng Sóng Xung Kích, gây " + dmg + " sát thương!";
             }
             case 3: {
                 if (!useMana(15)) {
                     System.out.println(getName() + " không đủ mana để dùng Tiếng Hô Chiến Trận!");
-                    return;
+                    return "";
                 }
                 increaseAttack(3);
                 heal(15);
-                System.out.println(getName() + " hô vang, tăng 3 tấn công và hồi 15 máu!");
-                break;
+                return getName() + " dùng Tiếng Hô Chiến Trận, tăng 3 sát thương và hồi 15 HP!";
             }
             default:
                 System.out.println("Skill không tồn tại!");
+                return "Skill không tồn tại!";
         }
     }
 

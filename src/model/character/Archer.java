@@ -31,50 +31,47 @@ public class Archer extends Hero {
 
     // useSkills method for Archer, 3 skills with different mana costs and effects
     @Override
-    public void useSkills(Characters target, int choice) {
+    public String useSkills(Characters target, int choice) {
         switch (choice) {
             case 1: {
-                if(!useMana(15)){
-                    System.out.println(getName() + " không đủ mana để dùng skill 1!");
-                    return;
+                if (!useMana(15)) {
+                    return getName() + " không đủ mana để dùng skill 1!";
                 }
                 int total = 0;
                 for (int i = 0; i < 2; i++) {
-                    if(!target.isAlive()) break;
-                    int dmg = Math.max(0, getAttack() - target.getDefense());
+                    if (!target.isAlive())
+                        break;
+                    int dmg = Math.max(0,
+                            getAttack() - target.getDefense());
                     target.takeDamage(dmg);
                     total += dmg;
                 }
-                System.out.println(getName() + " dùng skill 1, gây tổng cộng " + total + " sát thương!");
-                break;
+                return getName() + " dùng skill 1, gây tổng cộng " + total + " sát thương!";
             }
             case 2: {
                 if (!useMana(25)) {
-                    System.out.println(getName() + " không đủ mana để dùng skill 2!");
-                    return;
+                    return getName() + " không đủ mana để dùng skill 2!";
                 }
                 int dmg = getAttack();
                 target.takeDamage(dmg);
-                System.out.println(getName() + " dùng skill 2, gây " + dmg + " sát thương!");
-                break;
+                return getName() + " dùng skill 2, gây " + dmg + " sát thương!";
             }
             case 3: {
                 if (!useMana(40)) {
-                    System.out.println(getName() + " không đủ mana để dùng skill 3!");
-                    return;
+                    return getName() + " không đủ mana để dùng skill 3!";
                 }
                 int total = 0;
                 for (int i = 0; i < 3; i++) {
-                    if(!target.isAlive()) break;
+                    if (!target.isAlive())
+                        break;
                     int dmg = Math.max(0, getAttack() - target.getDefense());
                     target.takeDamage(dmg);
                     total += dmg;
                 }
-                System.out.println(getName() + " dùng skill 3, gây tổng cộng " + total + " sát thương!");
-                break;
+                return getName() + " dùng skill 3, gây tổng cộng " + total + " sát thương!";
             }
             default:
-                System.out.println("Skill không tồn tại!");
+                return getName() + " skill không tồn tại!";
         }
     }
 
@@ -83,5 +80,4 @@ public class Archer extends Hero {
     public String toString() {
         return "Archer: " + getName() + ", HP: " + getHp();
     }
-
 }
