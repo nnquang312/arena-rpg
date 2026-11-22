@@ -3,13 +3,11 @@ package model.character;
 public class Mage extends Hero {
 
     public Mage(String name) {
-        super(name, 80, 20, 5, 100);
+        super(name, 800, 10, 20, 400);
     }
 
-    @Override
-    public int calculateDamage() {
-        return getAttack() + getMana() / 10;
-    }
+    // after useSkills 5 times, the next attack will be a critical hit, atack damage
+    // will be x10
 
     @Override
     public String toString() {
