@@ -1,46 +1,55 @@
 package ui;
 
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 import model.character.Hero;
 import model.character.Monster;
 
-public class ConsoleUI {
+public class ConsoleUI implements GameUI {
 
     private final Scanner sc = new Scanner(System.in);
+    private final PrintStream out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
 
+    @Override
     public void showMessage(String message) {
-        System.out.println(message);
+        out.println(message);
     }
 
+    @Override
     public void showStatus(Hero hero, Monster enemy) {
-        System.out.println("\n--- Lượt của " + hero.getName() + " ---");
-        System.out.println(hero.getName() + " | HP " + hero.getHp() + "/" + hero.getMaxHP()
+        out.println("\n--- Lượt của " + hero.getName() + " ---");
+        out.println(hero.getName() + " | HP " + hero.getHp() + "/" + hero.getMaxHP()
                 + " | Mana " + hero.getMana() + "/" + hero.getMaxMana());
-        System.out.println(enemy.getName() + " | HP " + enemy.getHp() + "/" + enemy.getMaxHP());
+        out.println(enemy.getName() + " | HP " + enemy.getHp() + "/" + enemy.getMaxHP());
     }
 
+    @Override
     public int askAction() {
-        System.out.println("1. Đánh thường   2. Dùng kỹ năng");
+        out.println("1. Đánh thường   2. Dùng kỹ năng");
         return readInt(1, 2);
     }
 
+    @Override
     public int askSkill() {
-        System.out.println("Chọn kỹ năng (1 đến 3):");
+        out.println("Chọn kỹ năng (1 đến 3):");
         return readInt(1, 3);
     }
 
+    // Đọc số nguyên trong khoảng [min, max], gõ sai thì hỏi lại, không sập
     private int readInt(int min, int max) {
         while (true) {
             String line = sc.nextLine().trim();
             try {
                 int n = Integer.parseInt(line);
-                if (n >= min && n <= max)
+                if (n >= min && n <= max) {
                     return n;
+                }
             } catch (NumberFormatException e) {
                 // rơi xuống thông báo bên dưới
             }
-            System.out.println("Hãy nhập số từ " + min + " đến " + max + ":");
+            out.println("Hãy nhập số từ " + min + " đến " + max + ":");
         }
     }
 }
