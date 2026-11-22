@@ -5,16 +5,16 @@ import java.util.Random;
 
 import model.character.Hero;
 import model.character.Monster;
-import ui.ConsoleUI;
+import ui.GameUI;
 
 public class Battle {
 
     private final Team team;
     private final List<Monster> monsters;
-    private final ConsoleUI ui;
+    private final GameUI ui;
     private final Random rng = new Random();
 
-    public Battle(Team team, List<Monster> monsters, ConsoleUI ui) {
+    public Battle(Team team, List<Monster> monsters, GameUI ui) {
         this.team = team;
         this.monsters = monsters;
         this.ui = ui;
