@@ -3,26 +3,32 @@ import model.character.Warrior;
 
 public class Main {
     public static void main(String[] args) {
-        // Create characters
-        Warrior warrior = new Warrior("Conan");
+        // Create a Mage character
         Mage mage = new Mage("Gandalf");
 
-        while (warrior.isAlive() && mage.isAlive()) {
-            // Warrior attacks Mage
-            warrior.attack(mage);
-            System.out.println(warrior + " attacks " + mage + ". " + mage.getName() + " HP: " + mage.getHp());
+        // Create a Warrior character
+        Warrior warrior = new Warrior("Conan");
 
-            if (!mage.isAlive()) {
-                System.out.println(mage.getName() + " has been defeated!");
-                break;
-            }
-
+        while (mage.isAlive() && warrior.isAlive()) {
             // Mage attacks Warrior
-            mage.attack(warrior);
-            System.out.println(mage + " attacks " + warrior + ". " + warrior.getName() + " HP: " + warrior.getHp());
+            mage.attack(warrior, 0);
+            System.out.println(
+                    mage.getName() + " attacks " + warrior.getName() + " for " + mage.calculateDamage() + " damage.");
+            System.out.println(warrior.getName() + " has " + warrior.getHp() + " HP left.");
 
             if (!warrior.isAlive()) {
                 System.out.println(warrior.getName() + " has been defeated!");
+                break;
+            }
+
+            // Warrior attacks Mage
+            warrior.attack(mage, 0);
+            System.out.println(warrior.getName() + " attacks " + mage.getName() + " for " + warrior.calculateDamage()
+                    + " damage.");
+            System.out.println(mage.getName() + " has " + mage.getHp() + " HP left.");
+
+            if (!mage.isAlive()) {
+                System.out.println(mage.getName() + " has been defeated!");
                 break;
             }
         }
