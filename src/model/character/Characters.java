@@ -6,7 +6,7 @@ public abstract class Characters {
     private int hp;
     private int maxHP;
     private int attack;
-    private final int defense;
+    private int defense;
 
     public Characters(String name, int maxHP, int attack, int defense) {
         this.name = name;
@@ -62,9 +62,6 @@ public abstract class Characters {
     }
 
     private int computeDamage(Characters target, int bonus) {
-        if (bonus < 0) {
-            throw new IllegalArgumentException("Bonus cannot be negative");
-        }
         return Math.max(0, calculateDamage() + bonus - target.defense);
     }
 
