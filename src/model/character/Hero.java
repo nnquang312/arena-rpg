@@ -17,8 +17,7 @@ public abstract class Hero extends Characters {
         this.exp = 0;
     }
 
-    // overide method useSkills
-    // public abstract String useSkills(Characters target);
+    public abstract String useSkills(Characters target, int choice);
 
     // Method
     public void gainExp(int amount) {

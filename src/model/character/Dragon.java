@@ -1,5 +1,6 @@
 package model.character;
 
+
 public class Dragon extends Monster {
     private int turnCount;
 
