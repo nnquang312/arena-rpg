@@ -17,18 +17,30 @@ public abstract class Characters {
     }
 
     public void takeDamage(int damage) {
+        if (damage < 0) {
+            throw new IllegalArgumentException("Damage cannot be negative");
+        }
         this.hp = Math.max(0, this.hp - damage);
     }
 
     public void heal(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Healing amount cannot be negative");
+        }
         this.hp = Math.min(this.maxHP, this.hp + amount);
     }
 
     public void increaseAttack(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Attack increase cannot be negative");
+        }
         this.attack += amount;
     }
 
     protected void increaseMaxHP(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Max HP increase cannot be negative");
+        }
         this.maxHP += amount;
     }
 
@@ -43,14 +55,23 @@ public abstract class Characters {
     }
 
     public void attack(Characters target, int bonus) {
+        if (bonus < 0) {
+            throw new IllegalArgumentException("Bonus cannot be negative");
+        }
         target.takeDamage(computeDamage(target, bonus));
     }
 
     private int computeDamage(Characters target, int bonus) {
+        if (bonus < 0) {
+            throw new IllegalArgumentException("Bonus cannot be negative");
+        }
         return Math.max(0, calculateDamage() + bonus - target.defense);
     }
 
     public int calculateDamage() {
+        if (this.attack < 0) {
+            throw new IllegalArgumentException("Attack cannot be negative");
+        }
         return this.attack;
     }
 
